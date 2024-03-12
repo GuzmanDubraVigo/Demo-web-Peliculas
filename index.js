@@ -1,3 +1,7 @@
+// Codigo que utiliza la API de The Movie Database (TMDb) para mostrar listas de películas,
+// permitir búsquedas de películas por título y cambiar entre diferentes vistas (cuadrícula y lista)...
+
+// Consultar README punto 1
 const config = {
   apiKey: "15d2ea6d0dc1d476efbca3eba2b9bbfb",
   langIso: "es-ES",
@@ -23,13 +27,16 @@ function filterMoviesData(movies) {
     };
   });
 }
-getListMoviesData(movieListType.popular, 3)
+// Consultar README punto 2
+getListMoviesData(movieListType.popular, 1)
   .then((movies) => {
     console.log(movies);
   })
   .catch((error) => {
     console.error(error.message);
   });
+
+// Consultar README punto 3  
 async function getListMoviesData(movieListType, page = 1) {
   const movieListUrl = `${config.baseUrl}/movie/${movieListType}?language=${config.langIso}&api_key=${config.apiKey}&page=${page}`;
   const response = await fetch(movieListUrl);
@@ -41,6 +48,7 @@ async function getListMoviesData(movieListType, page = 1) {
 
   return filterMoviesData(data?.results ?? [5]);
 }
+// Consultar README punto 4
 window.onload = async function () {
   const moviesListContainer = document.getElementById("movies-list");
   const gridViewButton = document.getElementById("grid-view-button");
@@ -178,7 +186,7 @@ window.onload = async function () {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 };
-
+// Consultar README punto 
 // Busqueda de peliculas por titulo
 document.addEventListener("DOMContentLoaded", function () {
   const searchButton = document.getElementById("searchButton");
